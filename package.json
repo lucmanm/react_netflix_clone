@@ -2,13 +2,12 @@
   "name": "react_netflix_clone",
   "version": "1.0.0",
   "description": "",
-  "main": "backend/server.js",
+  "main": "backend/server.ts",
   "scripts": {
-    "dev": "nodemon backend/server.js"
+    "dev": "nodemon backend/server.ts"
   },
   "keywords": [],
   "author": "",
-  "type": "module",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.7.2",

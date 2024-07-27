@@ -1,7 +1,7 @@
 import express from "express";
-import authRoutes from "./routes/auth.route.js";
-import { ENV_VARS } from "./config/envVariables.js";
-import { connectDB } from "./config/db.js";
+import authRoutes from "../backend/routes/auth.route"
+import { ENV_VARS } from "./config/envVariables";
+import { connectDB } from "./config/db";
 
 const app = express();
 const PORT = ENV_VARS.PORT;
