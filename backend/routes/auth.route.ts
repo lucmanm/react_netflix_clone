@@ -2,10 +2,10 @@ import express from "express";
 import { logout, signin, signup } from "../controllers/auth.controller";
 
 
-const router = express.Router();
+const authRoutes = express.Router();
 
-router.post("/signup", signup);
-router.post("/signin", signin);
-router.post("/logout", logout);
+authRoutes.post("/signup", signup);
+authRoutes.post("/signin", signin);
+authRoutes.post("/logout", logout);
 
-export default router;
+export { authRoutes };
