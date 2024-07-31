@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { User } from "../models/user.model";
 import bcryptjs from "bcryptjs"
 import { generateTokenAndSetCokie } from "../utils/generateToken";
-import { errorResponse } from "../lib/controller-response";
+import { errorResponse, statusResponse } from "../lib/controller-response";
 
 
 export const signup = async (req: Request, res: Response) => {
@@ -12,27 +12,27 @@ export const signup = async (req: Request, res: Response) => {
     // Validation
 
     if (!email || !password || !username) {
-      return res.status(400).json({ success: false, message: "Missing requierd input" })
+      return statusResponse(res, 400, "Missing requierd input")
     }
     // Email RegEx
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     if (!emailRegex.test(email)) {
-      return res.status(400).json({ success: false, message: "Invalid Email Address" })
+      return statusResponse(res, 400, "Invalid Email Address")
     }
 
     if (password.length < 6) {
-      return res.status(400).json({ success: false, message: "Password must be at least 6 characters" })
+      return statusResponse(res, 400, "Password must be at least 6 characters")
     }
 
     const existingUserByEmail = await User.findOne({ email })
     if (existingUserByEmail) {
-      return res.status(400).json({ success: false, message: "Email Address already used." })
+      return statusResponse(res, 400, "Email Address already used.")
     }
 
     const existingUsername = await User.findOne({ username })
     if (existingUsername) {
-      return res.status(400).json({ success: false, message: "Username Exist" })
+      return statusResponse(res, 400, "Username Exist")
     }
 
     const salt = await bcryptjs.genSalt(10)
@@ -105,22 +105,17 @@ export const signin = async (req: Request, res: Response) => {
 
   } catch (error) {
     console.log("ERROR_SIGNIN_CONTROL", error);
-    res.status(500).json({
-      success: false, message: "Internal Server Error"
-    })
+    statusResponse(res, 500, "Internal Server Error")
   }
 };
 export const logout = async (req: Request, res: Response) => {
   try {
 
     res.clearCookie("jwt-netflix-token")
-    res.status(200).json({ sucess: true, message: "Successfully Logged Out" })
+    statusResponse(res, 200, "Successfully Logged Out")
 
   } catch (error) {
     console.log("ERROR_LOGOUT_CONTROL", error);
-
-    res.status(500).json({
-      success: false, message: "Internal Server Error"
-    })
+    statusResponse(res, 500, "Internal Server Error")
   }
 };

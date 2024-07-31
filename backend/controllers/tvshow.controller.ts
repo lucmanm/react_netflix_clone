@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { errorResponse } from "../lib/controller-response";
+import { statusResponse } from "../lib/controller-response";
 import { getMovies } from "../services/tmdb.service";
 
 export async function getTrendingTvShow(req: Request, res: Response) {
@@ -11,7 +11,7 @@ export async function getTrendingTvShow(req: Request, res: Response) {
     })
   } catch (error) {
     console.log("ERROR_CONTROLLER_TRENDING_MOVIE", error);
-    errorResponse(res, "ERROR_CONTROLLER_TRENDING_MOVIE")
+    statusResponse(res, 400, "ERROR_CONTROLLER_TRENDING_MOVIE")
   }
 }
 
@@ -28,7 +28,7 @@ export async function getTvShowTrailer(req: Request, res: Response) {
 
   } catch (error) {
     console.log("ERROR_CONTROLLER_TRAILER_MOVIE", error);
-    errorResponse(res, "ERROR_CONTROLLER_TRAILER_MOVIE")
+    statusResponse(res, 400, "ERROR_CONTROLLER_TRAILER_MOVIE")
   }
 }
 
@@ -44,7 +44,7 @@ export async function getTvShowDetails(req: Request, res: Response) {
 
   } catch (error) {
     console.log("ERROR_CONTROLLER_MOVIE_DETAILS", error);
-    errorResponse(res, "ERROR_CONTROLLER_MOVIE_DETAILS")
+    statusResponse(res, 400, "ERROR_CONTROLLER_MOVIE_DETAILS")
   }
 }
 
@@ -61,7 +61,7 @@ export async function getSimilarTvShows(req: Request, res: Response) {
 
   } catch (error) {
     console.log("ERROR_CONTROLLER_SIMILAR_MOVIES", error);
-    errorResponse(res, "ERROR_CONTROLLER_SIMILAR_MOVIES")
+    statusResponse(res, 400, "ERROR_CONTROLLER_SIMILAR_MOVIES")
   }
 }
 
@@ -78,6 +78,6 @@ export async function getTvShowsByCategoryName(req: Request, res: Response) {
 
   } catch (error) {
     console.log("ERROR_CONTROLLER_MOVIE_LISTS", error);
-    errorResponse(res, "ERROR_CONTROLLER_MOVIE_LISTS")
+    statusResponse(res, 400, "ERROR_CONTROLLER_MOVIE_LISTS")
   }
 }
