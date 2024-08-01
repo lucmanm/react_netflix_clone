@@ -28,8 +28,12 @@ export const protectRoute = async (req: Request, res: Response, next: NextFuncti
         if (!user) {
             return res.status(404).json({ success: false, message: "User not Found" })
         }
+        // TODO : typescript_error
+        // error TS2339: Property 'user' does not exist on type 'Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>'.
+        //req.user = {user}
 
-        // req.user = user
+        // @ts-ignore
+        req.user =  user
 
         next()
     } catch (error) {
