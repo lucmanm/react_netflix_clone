@@ -6,7 +6,7 @@ export const Header = () => {
   return (
     <header className="container flex justify-between items-center  ">
       <Link to="/">
-        <img src="../../../public/default/netflix-logo.png" alt="Netflix Logo" className="h-16 " />
+        <img src="default/netflix-logo.png" alt="Netflix Logo" className="h-16 " />
       </Link>
       <Button onClick={() => navigate("/sign-in")} className="bg-red-600">
         Sign In
