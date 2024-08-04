@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Header } from "@/components/header";
 
 const signUpSchema = z.object({
   email: z.string().min(5, "email Required"),
@@ -29,9 +30,7 @@ function SignUp() {
     <main className="flex items-start p-3 justify-center  font-semibol h-screen bg-hero *:text-slate-100">
       <div className="container">
         {/* Header Navigation */}
-        <nav>
-          <img src="../../public/default/netflix-logo.png" alt="Netflix Logo" className="h-12" />
-        </nav>
+        <Header />
         {/* login container */}
         <section className="flex items-center justify-center mt-28">
           <div className="bg-black/80 rounded-lg max-w-sm p-5">
@@ -71,8 +70,8 @@ function SignUp() {
               </div>
               <div className="text-center text-sm p-4 space-x-3">
                 <span>Don't have an Account?</span>
-                <Link to="/sign-up" className="text-red-600">
-                  Sign Up
+                <Link to="/sign-in" className="text-red-600">
+                  Sign In
                 </Link>
               </div>
             </form>

@@ -1,6 +1,7 @@
 function HomePage() {
   return (
-    <main className="bg-hero h-screen">
+    <main className="h-screen bg-slate-100">
+      home Screen
     </main>
   );
 }
