@@ -25,7 +25,7 @@ app.use("/api/v1/search", protectRoute, searchRoutes);
 // server port connection
 app.listen(PORT, () => {
   console.log("=================================================================");
-  console.log("Hello Lucman you server is running at https://localhost:" + PORT);
+  console.log("Hello Lucman you server is running at http://localhost:" + PORT);
   console.log("=================================================================");
   connectDB();
 });

@@ -12,7 +12,7 @@ export const signup = async (req: Request, res: Response) => {
     // Validation
 
     if (!email || !password || !username) {
-      return statusResponse(res, 400, "Missing requierd input")
+      return statusResponse(res, 400, "Missing input Required")
     }
     // Email RegEx
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -38,6 +38,7 @@ export const signup = async (req: Request, res: Response) => {
     const salt = await bcryptjs.genSalt(10)
     const hashedPassword = await bcryptjs.hash(password, salt)
 
+    // TODO Backend Error duplicate
     const PRORFILE_PICS = ["/avatar1.png", "/avatar2.png", "/avatar3.png"];
     const image = PRORFILE_PICS[Math.floor(Math.random() * PRORFILE_PICS.length)];
 
@@ -71,6 +72,8 @@ export const signup = async (req: Request, res: Response) => {
     })
   }
 };
+
+// Sign In Function
 
 export const signin = async (req: Request, res: Response) => {
   try {
@@ -108,6 +111,8 @@ export const signin = async (req: Request, res: Response) => {
     statusResponse(res, 500, "Internal Server Error")
   }
 };
+
+// Logout Function
 export const logout = async (req: Request, res: Response) => {
   try {
 
