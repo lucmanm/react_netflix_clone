@@ -6,6 +6,7 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/header";
+import { useAuthStore } from "@/store/authStore";
 
 const signUpSchema = z.object({
   email: z.string().min(5, "email Required"),
@@ -25,39 +26,29 @@ function SignIn() {
   };
 
   return (
-    <main className="flex items-start p-3 justify-center  font-semibol h-screen bg-hero *:text-slate-100">
+    <main className="font-semibol bg-hero flex h-screen items-start justify-center p-3 *:text-slate-100">
       <div className="container">
         {/* Header Navigation */}
         <Header />
         {/* login container */}
-        <section className="flex items-center justify-center mt-28">
-          <div className="bg-black/80 rounded-lg max-w-sm p-5">
-            <h1 className="text-xl font-semibold text-center">Login</h1>
+        <section className="mt-28 flex items-center justify-center">
+          <div className="max-w-sm rounded-lg bg-black/80 p-5">
+            <h1 className="text-center text-xl font-semibold">Login</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <Label htmlFor="Username">Username</Label>
-                <Input
-                  {...register("email")}
-                  className="bg-transparent"
-                  type="text"
-                  placeholder="Username"
-                />
+                <Input {...register("email")} className="bg-transparent" type="text" placeholder="Username" />
               </div>
               <div>
                 <Label htmlFor="passsword">Password</Label>
-                <Input
-                  {...register("passsword")}
-                  className="bg-transparent"
-                  type="password"
-                  placeholder="Password"
-                />
+                <Input {...register("passsword")} className="bg-transparent" type="password" placeholder="Password" />
               </div>
               <div>
-                <Button type="submit" className="bg-red-600 w-full mt-3">
+                <Button type="submit" className="mt-3 w-full bg-red-600">
                   Rigister
                 </Button>
               </div>
-              <div className="text-center text-sm p-4 space-x-3">
+              <div className="space-x-3 p-4 text-center text-sm">
                 <span>Don't have an Account?</span>
                 <Link to="/sign-up" className="text-red-600">
                   Sign Up

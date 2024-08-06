@@ -8,10 +8,11 @@ function RootLayout() {
 
   useEffect(() => {
     authCheck();
-  }, []);
+  }, [authCheck]);
+
 
   // const users = false;
-  return <main className="h-screen">{user ? <HomePage /> : <AuthPage />}</main>;
+  return <>{user ? <HomePage /> : <AuthPage />}</>;
 }
 
 export default RootLayout;

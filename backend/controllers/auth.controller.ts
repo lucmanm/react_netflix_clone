@@ -48,7 +48,7 @@ export const signup = async (req: Request, res: Response) => {
       password: hashedPassword,
       image
     })
-
+    // Error always generate token
     if (newUser) {
       // generates token
       generateTokenAndSetCokie(newUser._id, res)
@@ -117,8 +117,7 @@ export const logout = async (req: Request, res: Response) => {
   try {
     res.clearCookie("jwt-netflix-token")
     statusResponse(res, 200, "Successfully Logged Out")
-
-  } catch (error) {
+} catch (error) {
     console.log("ERROR_LOGOUT_CONTROL", error);
     statusResponse(res, 500, "Internal Server Error")
   }
