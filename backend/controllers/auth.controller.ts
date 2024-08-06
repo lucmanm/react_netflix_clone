@@ -55,6 +55,7 @@ export const signup = async (req: Request, res: Response) => {
       // data save executin
       await newUser.save()
       // Response
+      // TODO check if the below .__v removable
       res.status(200).json({
         success: true,
         user: { ...newUser.__v, password: "" }

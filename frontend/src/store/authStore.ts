@@ -1,23 +1,23 @@
 import axios from "axios"
 import { create } from "zustand";
 import { toast } from 'react-toastify';
-import { Redirect } from "react-router-dom";
 
 type TUser = {
     email: string;
-    username: string;
+    username?: string;
     password: string;
 }
 
 type TUserStore = {
     user: null,
     signUp: (credentials: TUser) => void
-    login: () => void
+    login: (credentials: TUser) => void
     logout: () => void
     authCheck: () => void
     isSigningUp: boolean
     isAuth: boolean
     isLoggedOut: boolean
+    isSignedIn: boolean
 }
 
 export const useAuthStore = create<TUserStore>()((set) => ({
@@ -25,9 +25,10 @@ export const useAuthStore = create<TUserStore>()((set) => ({
     isSigningUp: false,
     isAuth: true,
     isLoggedOut: false,
+    isSignedIn: false,
     signUp: async (credentials) => {
-        set({ isSigningUp: true })
         try {
+            set({ isSigningUp: true })
             const response = await axios.post("/api/v1/auth/signup", credentials)
 
             // TODO works fine even if after sign is state is not set
@@ -52,7 +53,18 @@ export const useAuthStore = create<TUserStore>()((set) => ({
         }
     },
 
-    login: async () => { },
+    login: async (credentials) => {
+        try {
+            set({ isSignedIn: true })
+            const response = await axios.post("/api/v1/auth/signin", credentials)
+            set({ user: response.data.user, isSignedIn: false })
+            toast.success("Successfully Singed in")
+        } catch (error) {
+            set({ isSignedIn: false, user: null })
+            console.error("ERROR_SIGNIN_CREDENTIALS", error)
+            toast.error("ERROR_SIGNIN_CREDENTIALS")
+        }
+    },
 
     logout: async () => {
         try {

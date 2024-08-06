@@ -4,25 +4,27 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import { Header } from "@/components/header";
 import { useAuthStore } from "@/store/authStore";
 
 const signUpSchema = z.object({
   email: z.string().min(5, "email Required"),
-  passsword: z.string().min(5, "password Required"),
+  password: z.string().min(5, "password Required"),
 });
 function SignIn() {
+  const { login } = useAuthStore();
+
   const { register, handleSubmit } = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
       email: "",
-      passsword: "",
+      password: "",
     },
   });
 
   const onSubmit = (data: z.infer<typeof signUpSchema>) => {
-    console.log(data);
+    login(data);
   };
 
   return (
@@ -41,11 +43,11 @@ function SignIn() {
               </div>
               <div>
                 <Label htmlFor="passsword">Password</Label>
-                <Input {...register("passsword")} className="bg-transparent" type="password" placeholder="Password" />
+                <Input {...register("password")} className="bg-transparent" type="password" placeholder="Password" />
               </div>
               <div>
                 <Button type="submit" className="mt-3 w-full bg-red-600">
-                  Rigister
+                  Login
                 </Button>
               </div>
               <div className="space-x-3 p-4 text-center text-sm">
