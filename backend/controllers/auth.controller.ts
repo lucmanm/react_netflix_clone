@@ -115,7 +115,6 @@ export const signin = async (req: Request, res: Response) => {
 // Logout Function
 export const logout = async (req: Request, res: Response) => {
   try {
-
     res.clearCookie("jwt-netflix-token")
     statusResponse(res, 200, "Successfully Logged Out")
 
@@ -124,3 +123,13 @@ export const logout = async (req: Request, res: Response) => {
     statusResponse(res, 500, "Internal Server Error")
   }
 };
+
+
+export const authCheck = async (req: Request, res: Response) => {
+  try {
+    // @ts-ignore
+    res.status(200).json({ success: true, user: req.user })
+  } catch (error) {
+    res.status(500).json({ success: false, message: "INTERNAL SERVER ERROR" })
+  }
+}
